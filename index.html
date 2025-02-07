@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Auction - ED Cell MNIT Jaipur</title>
+    <style>
+        :root {
+            --primary-blue: #007bff;
+            --primary-yellow: #ffd700;
+            --primary-black: #333333;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("3468697.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo-container.left {
+            justify-content: flex-start;
+        }
+
+        .logo-container.right {
+            justify-content: flex-end;
+        }
+
+        .logo {
+            height: 70px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .title-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .event-title {
+            text-align: center;
+            color: var(--primary-black);
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-subtitle {
+            text-align: center;
+            color: var(--primary-blue);
+            margin: 10px 0 0 0;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .login-form {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            max-width: 400px;
+            margin: 40px auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .login-form h2 {
+            color: var(--primary-black);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .sheet-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        input:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+
+        button {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin: 15px 0;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background-color: #0056b3;
+        }
+
+        button.logout {
+            background-color: #dc3545;
+            margin-bottom: 15px;
+        }
+
+        button.logout:hover {
+            background-color: #c82333;
+        }
+
+        .error {
+            color: #dc3545;
+            margin-top: 12px;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+            background-color: rgba(220, 53, 69, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .header h2 {
+            color: var(--primary-black);
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                height: 50px;
+            }
+            
+            .title-container {
+                margin: 20px;
+            }
+            
+            .event-title {
+                font-size: 28px;
+            }
+            
+            .event-subtitle {
+                font-size: 18px;
+            }
+            
+            .login-form {
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content" >
+            <div class="logo-container center">
+                <img src="edc logo white bg.jpg" alt="ED Cell MNIT" class="logo">
+                <img src="21_08_2020-ipl_logo_20650553.jpg" alt="MIIC" class="logo">
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="title-container">
+            <h1 class="event-title">IPL Auction 2024</h1>
+            <p class="event-subtitle">Organized by ED Cell MNIT Jaipur</p>
+        </div>
+
+        <div class="login-form" id="loginForm">
+            <h2>Team Login</h2>
+            <input type="text" id="teamId" placeholder="Enter Team ID">
+            <input type="password" id="password" placeholder="Enter Password">
+            <button onclick="login()">Access Team Sheet</button>
+            <p class="error" id="errorMessage">Invalid team ID or password</p>
+        </div>
+
+        <div class="sheet-container" id="sheetContainer">
+            <div class="header">
+                <h2 id="teamTitle">Team Sheet</h2>
+                <div>
+                    <button onclick="refreshSheet()" style="width: auto; margin-right: 10px;">Refresh Sheet</button>
+                    <button class="logout" onclick="logout()">Logout</button>
+                </div>
+            <iframe id="sheetFrame" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Team credentials and sheet URLs
+        //const teams = {
+            //'team1': { password: 'pass1', sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1001283648&amp;single=true&amp;widget=true&amp;headers=false', name: 'Mumbai Indians (MI)' },
+            //'team2': { password: 'pass2', sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=169279189&amp;single=true&amp;widget=true&amp;headers=false', name: 'Lucknow Super Giants (LSG)' },
+            //'team3': { password: 'pass3', sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=2023081210&amp;single=true&amp;widget=true&amp;headers=false', name: 'Punjab Kings (PK)' },
+            //'team4': { password: 'pass4', sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1002558891&single=true&widget=true&headers=false', name: 'Gujarat Titans (GT)' },
+            //'team5': { password: 'pass5', sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1399723925&single=true&widget=true&headers=false', name: 'Kolkata Knight Riders (KKR)' },
+            //'team6': { password: 'pass6', sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1743369030&single=true&widget=true&headers=false', name: 'Delhi Capitals (DC)' },
+            //'team7': { password: 'pass7', sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1029151790&single=true&widget=true&headers=false', name: 'Sunrisers Hyderabad (SRH)' },
+            //'team8': { password: 'pass8', sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1137491386&single=true&widget=true&headers=false', name: 'Rajasthan Royals (RR)' },
+            //'team9': { password: 'pass9', sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1921794542&amp;single=true&amp;widget=true&amp;headers=false', name: 'Royal Challengers Bangalore (RCB)' },
+            //'team10': { password: 'pass10', sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=2000546943&single=true&widget=true&headers=false', name: 'Chennai Super Kings (CSK)' }
+        //};
+        const teams = {
+        'team1': { 
+        password: 'pass1', 
+        sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1001283648&single=true&widget=true&headers=false&range=A1:Z1000', 
+        name: 'Mumbai Indians (MI)' 
+    },
+    'team2': { 
+        password: 'pass2', 
+        sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=169279189&single=true&widget=true&headers=false&range=A1:Z1000', 
+        name: 'Lucknow Super Giants (LSG)' 
+    },
+    'team3': { 
+        password: 'pass3', 
+        sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=2023081210&single=true&widget=true&headers=false&range=A1:Z1000', 
+        name: 'Punjab Kings (PK)' 
+    },
+    'team4': { 
+        password: 'pass4', 
+        sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1002558891&single=true&widget=true&headers=false&range=A1:Z1000', 
+        name: 'Gujarat Titans (GT)' 
+    },
+    'team5': { 
+        password: 'pass5', 
+        sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1399723925&single=true&widget=true&headers=false&range=A1:Z1000', 
+        name: 'Kolkata Knight Riders (KKR)' 
+    },
+    'team6': { 
+        password: 'pass6', 
+        sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1743369030&single=true&widget=true&headers=false&range=A1:Z1000', 
+        name: 'Delhi Capitals (DC)' 
+    },
+    'team7': { 
+        password: 'pass7', 
+        sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1029151790&single=true&widget=true&headers=false&range=A1:Z1000', 
+        name: 'Sunrisers Hyderabad (SRH)' 
+    },
+    'team8': { 
+        password: 'pass8', 
+        sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1137491386&single=true&widget=true&headers=false&range=A1:Z1000', 
+        name: 'Rajasthan Royals (RR)' 
+    },
+    'team9': { 
+        password: 'pass9', 
+        sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=1921794542&single=true&widget=true&headers=false&range=A1:Z1000', 
+        name: 'Royal Challengers Bangalore (RCB)' 
+    },
+    'team10': { 
+        password: 'pass10', 
+        sheetUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdroyu7rNdl3WFFa7aFAjsnTWeV47eimpZjsX4GLt_-TzJ-NImGx-KNCAvg4qeUHRUjpMo-o9Ec09j/pubhtml?gid=2000546943&single=true&widget=true&headers=false&range=A1:Z1000', 
+        name: 'Chennai Super Kings (CSK)' 
+    }
+};
+
+        // Check for saved login on page load
+        window.onload = function() {
+            const savedTeamId = sessionStorage.getItem('teamId');
+            if (savedTeamId && teams[savedTeamId]) {
+                showTeamSheet(savedTeamId);
+            }
+        };
+        
+        function getSheetUrl(baseUrl) {
+            // Remove any existing timestamp parameter
+            const urlWithoutTimestamp = baseUrl.split('&timestamp=')[0];
+            // Add fresh timestamp
+            return `${urlWithoutTimestamp}&timestamp=${Date.now()}`;
+        }
+
+        function refreshSheet() {
+            const frame = document.getElementById('sheetFrame');
+            const currentTeamId = sessionStorage.getItem('teamId');
+            if (currentTeamId && teams[currentTeamId]) {
+                frame.src = getSheetUrl(teams[currentTeamId].sheetUrl);
+            }
+        }
+
+        function startAutoRefresh() {
+            setInterval(refreshSheet, 300000); // 5 minutes
+        }
+
+        function login() {
+            const teamId = document.getElementById('teamId').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (teams[teamId] && teams[teamId].password === password) {
+                sessionStorage.setItem('teamId', teamId);
+                showTeamSheet(teamId);
+                errorMessage.style.display = 'none';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        function showTeamSheet(teamId) {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('sheetContainer').style.display = 'block';
+            document.getElementById('teamTitle').textContent = teams[teamId].name + ' Sheet';
+            document.getElementById('sheetFrame').src = getSheetUrl(teams[teamId].sheetUrl);
+            startAutoRefresh();
+        }
+
+        function logout() {
+            sessionStorage.removeItem('teamId');
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('sheetContainer').style.display = 'none';
+            document.getElementById('teamId').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('sheetFrame').src = '';
+        }
+    </script>
+</body>
+</html> 
